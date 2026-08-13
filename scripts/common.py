@@ -5,9 +5,6 @@ import re
 from pathlib import Path
 from typing import Any
 
-import yaml
-
-
 PLUGIN_ROOT = Path(__file__).resolve().parent.parent
 SKILLS_ROOT = PLUGIN_ROOT / "skills"
 PLUGIN_MANIFEST_PATH = PLUGIN_ROOT / ".codex-plugin" / "plugin.json"
@@ -27,6 +24,8 @@ def load_json(path: Path) -> Any:
 
 
 def load_yaml(path: Path) -> Any:
+    import yaml
+
     with path.open(encoding="utf-8") as handle:
         return yaml.safe_load(handle)
 
@@ -36,6 +35,8 @@ def read_text(path: Path) -> str:
 
 
 def parse_skill_frontmatter(skill_md_path: Path) -> dict[str, Any]:
+    import yaml
+
     contents = read_text(skill_md_path)
     if not contents.startswith("---\n"):
         raise ValueError(f"{skill_md_path} must start with YAML frontmatter")
