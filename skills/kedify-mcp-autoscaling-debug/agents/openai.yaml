@@ -1,0 +1,11 @@
+interface:
+  display_name: Kedify Autoscaling Debug
+  short_description: Diagnose Kedify autoscaling issues with hosted MCP tools.
+  default_prompt: Debug why this Kedify cluster is not autoscaling.
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "kedify"
+      description: "Inspect Kedify clusters, agents, and autoscaling checks"
+      transport: "streamable_http"
+      url: "https://mcp.kedify.io/mcp"

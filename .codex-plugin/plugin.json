@@ -1,0 +1,28 @@
+{
+  "name": "kedify-mcp",
+  "version": "0.1.0",
+  "description": "Kedify MCP plugin packaging for hosted cluster and autoscaling workflows.",
+  "author": {
+    "name": "Kedify"
+  },
+  "skills": "./skills/",
+  "apps": "./.app.json",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Kedify MCP",
+    "shortDescription": "Inspect Kedify clusters, agents, and autoscaling behavior.",
+    "longDescription": "Connect Codex or ChatGPT to Kedify's hosted MCP server for cluster inspection and autoscaling debugging workflows.",
+    "developerName": "Kedify",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Debug why this Kedify cluster is not autoscaling.",
+      "Check autoscaling health for this Kedify cluster.",
+      "Inspect trigger health and scaled objects for this Kedify agent."
+    ]
+  }
+}

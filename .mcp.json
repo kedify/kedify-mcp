@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "kedify": {
+      "type": "http",
+      "url": "https://mcp.kedify.io/mcp",
+      "oauth_resource": "https://mcp.kedify.io"
+    }
+  }
+}
