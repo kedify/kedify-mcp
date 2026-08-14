@@ -96,3 +96,9 @@ Release artifacts are optimized for ChatGPT skill upload.
 - no separate whole-plugin zip release artifact
 
 See [RELEASING.md](/home/jkarasek/go/src/github.com/kedify/kedify-mcp/RELEASING.md:1) for the exact artifact layout, versioning model, and GitHub Actions release flow.
+
+The preferred local release command is:
+
+```bash
+python scripts/cut_release.py --version 0.1.0 --push
+```
