@@ -57,13 +57,13 @@ python3 scripts/validate_plugin.py
 python3 scripts/validate_skills.py
 ```
 
-If you want Codex to load this repo as a local plugin, the simplest path is to expose this repo at `~/plugins/kedify-mcp` and use a local marketplace entry that points to `./plugins/kedify-mcp`.
+If you want Codex to load this repo as a local plugin, the simplest path is to expose this repo under your local `plugins/` directory and use a local marketplace entry that points to `./plugins/kedify-mcp`.
 
 Example:
 
 ```bash
-mkdir -p ~/plugins
-ln -sfn /home/jkarasek/go/src/github.com/kedify/kedify-mcp ~/plugins/kedify-mcp
+mkdir -p "$HOME/plugins"
+ln -sfn "$PWD" "$HOME/plugins/kedify-mcp"
 ```
 
 After the marketplace entry exists, use the normal local update flow:
@@ -71,8 +71,7 @@ After the marketplace entry exists, use the normal local update flow:
 1. Refresh the plugin cachebuster:
 
 ```bash
-python3 /home/jkarasek/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster.py \
-  /home/jkarasek/go/src/github.com/kedify/kedify-mcp
+python3 scripts/set_plugin_version.py --version 0.1.0
 ```
 
 2. Reinstall the plugin from the configured local marketplace:
@@ -95,4 +94,10 @@ Release artifacts are optimized for ChatGPT skill upload.
 - one zip artifact per skill
 - no separate whole-plugin zip release artifact
 
-See [RELEASING.md](/home/jkarasek/go/src/github.com/kedify/kedify-mcp/RELEASING.md:1) for the exact artifact layout, versioning model, and GitHub Actions release flow.
+See [`RELEASING.md`](RELEASING.md) for the exact artifact layout, versioning model, and GitHub Actions release flow.
+
+The preferred local release command is:
+
+```bash
+python scripts/cut_release.py --version 0.1.0 --push
+```

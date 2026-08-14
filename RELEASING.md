@@ -73,23 +73,47 @@ Reasons:
 Versioning convention:
 
 - Git tag: `v0.1.0`
-- `.codex-plugin/plugin.json` version: `0.1.0`
+- release-stamped `.codex-plugin/plugin.json` version: `0.1.0`
 - release asset: `kedify-mcp-autoscaling-debug-v0.1.0.zip`
 
 ## Release steps
 
-1. Update skill or plugin-packaging source files in this repo.
-2. If needed, deploy compatible MCP backend changes from `dashboard-api-service` first.
-3. Bump `.codex-plugin/plugin.json` `version`.
-4. Merge to `main`.
-5. Tag the release:
+Preferred local release command:
 
 ```bash
-git tag v0.1.0
+python scripts/cut_release.py --version 0.1.0 --push
+```
+
+What it does:
+
+- requires a clean git worktree
+- stamps `.codex-plugin/plugin.json` to `0.1.0`
+- validates plugin and skills
+- builds and verifies the skill archives locally
+- commits the version bump with `release: v0.1.0`
+- creates annotated tag `v0.1.0`
+- pushes the current branch and tag when `--push` is passed
+
+Manual step-by-step equivalent:
+
+1. Update skill or plugin-packaging source files in this repo.
+2. If needed, deploy compatible MCP backend changes from `dashboard-api-service` first.
+3. Merge to `main`.
+4. Run:
+
+```bash
+python scripts/cut_release.py --version 0.1.0
+```
+
+5. If you did not use `--push`, push the branch and tag:
+
+```bash
+git push origin HEAD
 git push origin v0.1.0
 ```
 
 6. GitHub Actions will:
+   - stamp `.codex-plugin/plugin.json` to the tag version inside the CI workspace
    - validate plugin manifests
    - validate each skill
    - build one zip per skill into `dist/`
@@ -102,10 +126,17 @@ Run the same checks locally before tagging:
 
 ```bash
 python -m pip install --upgrade pip pyyaml
-python scripts/validate_plugin.py
+python scripts/set_plugin_version.py --version 0.1.0
+python scripts/validate_plugin.py --expected-version 0.1.0
 python scripts/validate_skills.py
-python scripts/build_skill_archives.py --out dist
+python scripts/build_skill_archives.py --version 0.1.0 --out dist
 python scripts/verify_archives.py dist
+```
+
+You can also preview the release cutter without changing git state:
+
+```bash
+python scripts/cut_release.py --version 0.1.0 --dry-run
 ```
 
 ## ChatGPT upload
