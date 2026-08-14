@@ -58,7 +58,11 @@ def main() -> None:
     run_python_script("scripts/verify_archives.py", "dist")
 
     git("add", ".codex-plugin/plugin.json")
-    git("commit", "-m", f"release: {tag_name}")
+    diff = subprocess.run(["git", "diff", "--cached", "--quiet"], check=False)
+     if diff.returncode == 0:
+         print("No plugin.json changes to commit; tagging current HEAD")
+     else:
+         git("commit", "-m", f"release: {tag_name}")
     git("tag", "-a", tag_name, "-m", tag_name)
 
     print(f"Created release commit and tag {tag_name}")
