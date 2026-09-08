@@ -34,6 +34,7 @@ Example:
 ```text
 kedify-mcp-autoscaling-debug-v0.1.0.zip
 ├── SKILL.md
+├── LICENSE
 ├── agents/
 │   └── openai.yaml
 └── references/
@@ -44,6 +45,9 @@ Rules:
 
 - `SKILL.md` must be at the archive root.
 - Only files from that skill directory are included.
+- Each skill directory includes its applicable `LICENSE` so every archive
+  carries the full license text. The current skills use the same Apache 2.0
+  text as the repository root.
 - Repo-level plugin files such as `.codex-plugin/plugin.json`, `.mcp.json`, `.app.json`, and `README.md` are never included in skill zips.
 
 ## Naming
