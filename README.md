@@ -101,3 +101,10 @@ The preferred local release command is:
 ```bash
 python scripts/cut_release.py --version 0.1.0 --push
 ```
+
+## License
+
+The plugin packaging, scripts and bundled skills in this repository are
+licensed under the [Apache License 2.0](LICENSE). Each released skill
+archive includes the license text. Access to hosted Kedify services is
+governed separately; this license grants no service entitlement.
